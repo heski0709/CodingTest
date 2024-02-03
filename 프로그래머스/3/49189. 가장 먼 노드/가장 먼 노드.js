@@ -6,22 +6,17 @@ function solution(n, edge) {
     });
 
     let answer = 0;
-    const queue = [1];
-    
-    while (true) {
-        const copy = [...queue]
-        for (; copy.length; ) {
-            const q = copy.pop();
-    
+    const que = [1];
+    while (1) {
+        [...que].forEach((q) => {
+            que.shift();
             if (node.has(q)) {
-                node.get(q).forEach((k) => {
-                    if (node.has(k)) queue.push(k);
+                node.get(q).forEach((a) => {
+                    if (node.has(a)) que.push(a);
                 });
-    
                 node.delete(q);
             }
-        }
-
+        });
         if (!node.size) return answer;
         answer = node.size;
     }
